@@ -14,3 +14,9 @@ n1 = n1 + n2
 n2 = n1 - n2
 n1 = n1 - n2
 print("After swapping without temp: n1 =", n1, "and n2 =", n2)
+
+# using function
+def swap(a, b):
+    return b, a
+n1, n2 = swap(n1, n2)
+print("After swapping using function: n1 =", n1, "and n2 =", n2)
