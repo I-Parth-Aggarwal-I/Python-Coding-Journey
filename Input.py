@@ -1,10 +1,10 @@
 print("Hello again, World!")
 print("This is my second Python program.")
 print("Now allow me to get to know you better.")
-name = input("What is your name? ")
+name = input("What is your name?\n")
 print(f"So your name is {name}, that's a nice name!")
 print("Nice to meet you, " + name + "!")
-age = input("How old are you? ")
+age = input("How old are you?\n")
 print("You are", age, "years old, that's great!")
 print("I hope you enjoy learning Python as much as I do!")
 
