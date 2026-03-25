@@ -21,3 +21,11 @@ print("\n")
 
 for i in range(n,0,-1):
     print(" "*int(n-i) + "* "*(i))
+
+#Diamond Pattern
+
+print("\n")
+
+for i in range(1,2*n+1):
+    print(" "*abs(int(n-i)) + "* "*(i if i<n+1 else 2*n-i))
+
