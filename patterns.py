@@ -14,3 +14,10 @@ print("\n")
 
 for i in range(n):
     print(" "*int(n-1-i) + "* "*(i+1))
+
+#Inverted triangle pattern
+
+print("\n")
+
+for i in range(n,0,-1):
+    print(" "*int(n-i) + "* "*(i))
