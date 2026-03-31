@@ -1,6 +1,4 @@
 import random
-player_money = 5000
-bet = 0
 
 def bets(chips ,bet ,player_money): 
     print(f"You have ${player_money} to bet.")
@@ -9,8 +7,7 @@ def bets(chips ,bet ,player_money):
         choice = int(input("Place your bets: "))
         if choice in chips and choice <= player_money and bet <= player_money:
             bet += choice
-            player_money -= choice
-            c = input(f"Do you want to add another chip? You have ${player_money} left to bet. (y/n): ")
+            c = input(f"Do you want to add another chip? You have ${player_money-bet} left to bet. (y/n): ")
             if c == 'n':
                 print(f"You have bet ${bet}.")
                 break
@@ -50,23 +47,31 @@ def hit_or_stand(player, dealer, cards):
         else:
             print("Invalid choice. Please enter 'hit' or 'stand'.")
 
-def win_or_lose(player, dealer, cards):
+def win_or_lose(player_money, bet,player, dealer, cards):
     if player is not None:
         while calculate_score(dealer, cards) < 17:
             dealer = deal_card(dealer, cards)
         print(f"Dealer's cards: {dealer} (Score: {calculate_score(dealer, cards)})")
         if calculate_score(dealer, cards) > 21:
             print("Dealer busts! You win.")
+            player_money += bet
         elif calculate_score(player, cards) > calculate_score(dealer, cards):
             print("You win!")
+            player_money += bet
         elif calculate_score(player, cards) < calculate_score(dealer, cards):
             print("Dealer wins!")
+            player_money -= bet
         else:
             print("It's a tie!")
+        return player_money
+    else:
+        player_money -= bet
+        return player_money
 
-def play_game(player_money=player_money, bet=bet):
+def play_game(player_money):
     cards = {'Ace': 11, 'Two': 2, 'Three': 3, 'Four': 4, 'Five': 5, 'Six': 6, 'Seven': 7, 'Eight': 8, 'Nine': 9, 'Ten': 10, 'Jack': 10, 'Queen': 10, 'King': 10}
     chips = [0, 1, 10, 100, 500]
+    bet = 0
     player = []
     dealer = []
     print("Welcome to Blackjack!")
@@ -77,13 +82,12 @@ def play_game(player_money=player_money, bet=bet):
     dealer = deal_card(dealer, cards)
     display_hands(player, dealer, cards)
     player = hit_or_stand(player, dealer, cards)
-    win_or_lose(player, dealer, cards)
+    player_money = win_or_lose(player_money, bet,player, dealer, cards)
     choice = input("Do you want to play again? (y/n): ")
     if choice == 'y':
-        play_game(player_money, bet)
+        play_game(player_money)
     else:
         print("Thanks for playing! Goodbye.")
 
-play_game()
-
+play_game(5000)
 
